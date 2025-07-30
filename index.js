@@ -1,19 +1,18 @@
-products.forEach(product => {
-  const variant = product.variants?.[0];
+produtos.forEach(produto => {
+  const variante = produto.variantes?.[0];
 
   // Ignora produtos incompletos
-  if (!variant || !variant.price || !product.image?.src) return;
+  if (!variante || !variante.preco || !produto.imagem?.fonte) return;
 
-  const item = feed.ele('item');
-  item.ele('id', product.id);
-  item.ele('title', product.title || '');
-  item.ele('link', `${SHOP_DOMAIN}/products/${product.handle}`);
-  item.ele('description').dat(product.body_html || '');
-  item.ele('guid', String(product.id));
-  item.ele('pubDate', new Date(product.published_at).toUTCString());
-  item.ele('price', `${variant.price} BRL`);
-  item.ele('image_link', product.image.src);
-  item.ele('availability', variant.available ? 'in stock' : 'out of stock');
+  const item = alimentador.ele('item');
+  item.ele('id', produto.id);
+  item.ele('title', produto.titulo || '');
+  item.ele('link', `${DOMINIO_DA_LOJA}/produtos/${produto.lidar}`);
+  item.ele('description').dat(produto.corpo_html || '');
+  item.ele('guid', String(produto.id));
+  item.ele('pubDate', new Date(produto.publicado_em).toUTCString());
+  item.ele('price', `${variante.preco} BRL`);
+  item.ele('image_link', produto.imagem.fonte);
+  item.ele('availability', variante.disponível ? 'in stock' : 'out of stock');
   item.ele('condition', 'new');
 });
-
